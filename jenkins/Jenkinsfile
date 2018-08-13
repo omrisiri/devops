@@ -17,5 +17,10 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage('Send email to all') {
+            steps {
+                echo 'sending an email to everyone....'
+            }
+        }
     }
 }
