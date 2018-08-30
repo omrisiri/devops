@@ -1,16 +1,21 @@
 node ('java-builder'){
+    stage ("Setup maven toolkit"){
+        mvnHome = tool 'M3'
+        tool name: 'M3', type: 'maven'
+    }
+
     stage("checkout some code"){
-            checkout scm
         sh('echo Hello world')
 
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/omrisiri/maven-hello-world.git']]])
 
-        sh('ls -la')
-    }
 
-    stage("do something in parralell"){
+
+}
+
+stage("do something in parralell"){
     parallel(
-            build1:{ 
+            build1:{
                 node('java-builder'){
                     sh('echo build1 ; sleep 35')
                 }
@@ -21,9 +26,6 @@ node ('java-builder'){
                 }
             }
     )
-
-
-    }
-
-
 }
+
+
