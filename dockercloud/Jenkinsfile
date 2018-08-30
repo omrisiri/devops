@@ -2,6 +2,7 @@ node ('java-builder'){
 
 
     sh('echo Hello world')
+    sh('ls -laR')
 
 
 }
