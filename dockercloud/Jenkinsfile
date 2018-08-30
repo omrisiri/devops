@@ -1,11 +1,22 @@
 node ('java-builder'){
+    stage("checkout some code"){
+            checkout scm
+        sh('echo Hello world')
 
-    checkout scm
-    sh('echo Hello world')
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/omrisiri/maven-hello-world.git']]])
 
-    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/omrisiri/maven-hello-world.git']]])
+        sh('ls -la')
+    }
 
-    sh('ls -la')
+    parallel(
+            build1: node('java-builder'){
+                sh('echo build1 ; sleep 35')
+            },
 
+            build2: node('java-builder'){
+                sh('echo build2 ; sleep 30')
+            },
+    )
 
+    }
 }
