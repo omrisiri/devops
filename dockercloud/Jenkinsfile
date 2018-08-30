@@ -16,7 +16,7 @@ node ('java-builder'){
 
             build2: node('java-builder'){
                 sh('echo build2 ; sleep 30')
-            },
+            }
     )
 
 
