@@ -1,6 +1,6 @@
 node ('java-builder'){
 
-
+    checkout scm
     sh('echo Hello world')
     sh('ls -laR')
 
