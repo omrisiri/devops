@@ -9,8 +9,7 @@ node ('java-builder'){
 
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/omrisiri/maven-hello-world.git']]])
 
-
-
+    }
 }
 
 stage("do something in parralell"){
