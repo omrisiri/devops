@@ -10,6 +10,13 @@ node ('java-builder'){
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/omrisiri/maven-hello-world.git']]])
 
     }
+
+    stage("build maven project"){
+
+    sh "cd my-app ; ${mvnHome}/bin/mvn package"
+    stash includes: 'my-app/target/my-app*.jar', name: 'myapp'
+
+    }
 }
 
 stage("do something in parralell"){
