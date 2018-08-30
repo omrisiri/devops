@@ -16,9 +16,22 @@ node ('java-builder'){
     sh "cd my-app ; ${mvnHome}/bin/mvn package"
     stash includes: 'my-app/target/my-app*.jar', name: 'myapp'
 
+
     }
 }
+stage("Build docker image"){
 
+    node ('docker'){
+
+      checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/omrisiri/maven-hello-world.git']]])
+      unstash 'myapp'
+      docker_artifact = docker.build("my-app:latest", "-f Dockerfile .")
+
+
+    }
+
+
+}
 stage("do something in parralell"){
     parallel(
             build1:{
