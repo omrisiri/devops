@@ -8,6 +8,7 @@ node ('java-builder'){
         sh('ls -la')
     }
 
+    stage("do something in parralell"){
     parallel(
             build1: node('java-builder'){
                 sh('echo build1 ; sleep 35')
@@ -17,5 +18,9 @@ node ('java-builder'){
                 sh('echo build2 ; sleep 30')
             },
     )
+
+
+    }
+
 
 }
