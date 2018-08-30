@@ -1,0 +1,7 @@
+node ('java-builder'){
+
+
+    sh('echo Hello world')
+
+
+}
