@@ -1,4 +1,4 @@
-node {
+node('java-builder') {
    def mvnHome
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
@@ -15,5 +15,11 @@ node {
    stage('Results') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archive 'jenkins-workshop/target/*.jar'
+   }
+   stage ('build docker image'){
+
+
+   sh "docker build -t mvn-${BUILD_NUMBER} jenkins-workshop/"
+
    }
 }
