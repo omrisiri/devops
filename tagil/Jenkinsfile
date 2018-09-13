@@ -1,0 +1,41 @@
+node{
+  node('docker'){
+  def mvnHome
+  stage('Preparation') {
+      // Get some code from a GitHub repository
+      git 'https://github.com/zivkashtan/course.git';
+      // Get the Maven tool.
+      mvnHome = tool 'M3'
+   }
+  
+ stage('Package') {
+      // Run the maven package
+      echo sh (returnStdout: true, script: "'${mvnHome}/bin/mvn' package")
+      stash includes: 'web/target/**.war', name: 'war'
+   }
+  
+  stage('Creating Dockerfile') {
+       //Create the Dockerfile in the workdir
+             git 'https://github.com/omrisiri/devops.git';
+             unstash 'war'
+   }
+  
+  stage('Docker build image') {
+       echo sh (returnStdout: true, script: "docker build -t kuku/time-tracker tagil/.")
+   }
+  
+  stage('Ansible push image') {
+      //Doing the docker login into the DockerHub
+      //Pushing the image to the repository
+      echo sh (returnStdout: true, script: "ansible-playbook /home/ubuntu/docker_push_playbook.yml -i /home/ubuntu/hosts")
+      
+   } 
+
+  stage('Ansible pull and run image') {
+      //Pull image from the DockerHub
+      //Run the image within the exposed '80' port
+      echo sh (returnStdout: true, script: "ansible-playbook /home/ubuntu/docker_pull_run_playbook.yml -i /home/ubuntu/hosts")
+      
+   }
+}
+}
