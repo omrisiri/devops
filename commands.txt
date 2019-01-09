@@ -3,4 +3,7 @@ kubectl describe po
 kubectl get service
 kubectl describe service
 kubectl apply -f service.yaml
-
+kubectl explain pod
+kubectl explain pod.spec
+kubectl explain service
+kubectl explain service.yaml
