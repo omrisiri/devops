@@ -1,0 +1,6 @@
+kubectl get po
+kubectl describe po
+kubectl get service
+kubectl describe service
+kubectl apply -f service.yaml
+
