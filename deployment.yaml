@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: explorer
+  labels:
+    app: explorer
+    env: production
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: explorer
+      env: production
+  template:
+    metadata:
+      name: explorer
+      labels:
+        app: explorer
+        env: production
+    spec:
+      containers:
+        - name: explorer
+          image: tomcat
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/mount/test-volume"
+              name: test-volume
+      volumes:
+        - name: test-volume
+          emptyDir: {}
+
