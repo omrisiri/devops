@@ -1,0 +1,8 @@
+Introduction to Amazon EC2 Auto Scaling
+Working with Elastic Load Balancing
+Introduction to Amazon Route 53
+Introduction to AWS Identity and Access Management
+Using Open Data with Amazon S3
+Maintaining High Availability with Auto Scaling (for Linux)
+Working with Amazon Elastic Block Store (EBS)
+
