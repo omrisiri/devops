@@ -5,4 +5,4 @@ Introduction to AWS Identity and Access Management
 Using Open Data with Amazon S3
 Maintaining High Availability with Auto Scaling (for Linux)
 Working with Amazon Elastic Block Store (EBS)
-
+Introduction to Amazon Elastic File System (EFS)
